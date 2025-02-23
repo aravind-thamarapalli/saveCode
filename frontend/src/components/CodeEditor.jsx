@@ -10,10 +10,11 @@ function Snippet({ onSubmit }) {
     const [code, setCode] = useState("");
     const [uniqueId, setUniqueId] = useState("");
     const [copied, setCopied] = useState(false);
+    const [language, setLanguage] = useState("javascript");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({ uniqueId, code });
+        onSubmit({ uniqueId, code, language });
     };
 
     const themeClasses = theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-black";
@@ -38,6 +39,17 @@ function Snippet({ onSubmit }) {
                 onChange={(value) => setCode(value)}
                 className="mb-4 border rounded-0"
             />
+            <select
+                className={`w-full p-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500 ${inputClasses}`}
+                onChange={(e) => setLanguage(e.target.value)}
+                required
+            >
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+                <option value="cpp">C++</option>
+            </select>
             <CopyToClipboard text={code} onCopy={() => setCopied(true)}>
                 <button
                     type="button"
